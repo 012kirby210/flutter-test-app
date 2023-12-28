@@ -50,6 +50,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     var pair = appState.current;
+    var theme = Theme.of(context);
 
     return Scaffold(
       body: Center(
@@ -61,6 +62,24 @@ class MyHomePage extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
+                ElevatedButton(
+                  onPressed: () {
+                    appState.toggleFavorite();
+                  }, 
+                  child: 
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          color: theme.colorScheme.primary,
+                        ),
+                        SizedBox(width: 6),
+                        Text('Favorite'),
+                      ],
+                      )
+                  ),
+                  SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: () {
                     appState.getNext();
