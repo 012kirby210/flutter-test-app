@@ -46,19 +46,17 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  
+  var selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var pair = appState.current;
-    var theme = Theme.of(context);
-    IconData icon;
-    if (appState.favorites.contains(pair)){
-      icon = Icons.favorite;
-    }else{
-      icon = Icons.favorite_border;
-    }
-
     return Scaffold(
       body: Row(
         children: [
@@ -75,9 +73,9 @@ class MyHomePage extends StatelessWidget {
                 label: Text('Home'),
                 )
             ],
-            selectedIndex: 0,
+            selectedIndex: selectedIndex,
             onDestinationSelected: (value) {
-              print('select : $value');
+              selectedIndex = value;
             },
             ),
           ),
